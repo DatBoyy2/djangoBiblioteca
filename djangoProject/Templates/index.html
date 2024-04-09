@@ -1,0 +1,32 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="decription" content="">
+    <link rel="stylesheet" href="{% static 'style/styles.css' %}">
+
+    <title>
+        {% block title %}
+        {% endblock title %}
+    </title>
+
+  
+</head>
+
+<body class="{% block bodyClass %}{% endblock bodyClass %}">
+
+    {% block header %} 
+    <a href="{% url 'Users_app:user-logout' %}">Cerrar Sesion</a>
+    {% endblock header %}
+
+    {% block content %} 
+    {% endblock content %}
+
+    {% block footer %}
+    {% endblock footer %}
+
+
+</body>
+</html>

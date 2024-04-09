@@ -1,0 +1,41 @@
+{% extends "index.html" %}
+{% load static %}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+
+{% block content %} 
+
+<h1>{{ libro.title }}</h1>
+<img src="{{ libro.img.url }}" alt="Imagen del libro" style="max-width: 300px; max-height: 300px;">
+<p>
+    <b>Autor:</b>
+    {% for author in libro.author.all %}
+        {{ author.name }}
+        {% if not forloop.last %}, {% endif %}
+    {% endfor %}
+</p>
+<p><b>Año de edición:</b> {{ libro.year }}</p>
+<p>
+    <b>Editorial:</b>
+    {% for editorial in libro.editorial.all %}
+        {{ editorial.name }}
+        {% if not forloop.last %}, {% endif %}
+    {% endfor %}
+</p>
+<p><b>Tema:</b>
+    {% for tema in libro.theme.all %}
+        {{ tema.name }}
+        {% if not forloop.last %}, {% endif %}
+    {% endfor %}
+</p>
+<p><b>ISBN:</b> {{ libro.ISBN }}</p>
+<p><b>SBM:</b> {{ libro.SBM }}</p>
+<p><b>Descripción:</b> {{ libro.plot }}</p>
+
+<a href="{% url 'Biblioteca_app:list' %}">Volver a la lista de libros</a>
+
+{% endblock content %}

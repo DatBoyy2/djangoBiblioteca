@@ -1,0 +1,53 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+
+{% block content %} 
+
+
+<div class="list">
+    
+    <h1>Libros</h1>
+    {% if request.user.usertype == 'editor' or request.user.usertype == 'admin' %}
+    <a href="{% url 'Biblioteca_app:create_view'%}"> 
+        
+        <button type="button">Crear Libro</button>
+    </a>
+    {% endif %}
+
+</div>
+
+
+
+<form method="GET">
+    <input type="text" name="query" placeholder="Buscar libros...">
+    <button type="submit">Buscar</button>
+</form>
+
+{% if query %}
+    <h2>Resultados de la búsqueda para "{{ query }}":</h2>
+{% endif %}
+
+<ul>
+    {% for libro in dataset %}
+        <li>
+            <a href="{% url 'Biblioteca_app:libro-detail' libro.pk %}">
+                {{ libro.title }}
+            </a>
+            - 
+            {% for author in libro.author.all %}
+                {{ author.name }}
+                {% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        </li>
+    {% endfor %}
+</ul>
+
+
+{% endblock content %} 
